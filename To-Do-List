@@ -1,0 +1,82 @@
+import tkinter as tk
+
+from tkinter import messagebox
+
+class ToDoList:
+    def __init__(self, root):
+        self.root = root
+        self.root.title("To-Do List")
+        self.task = []
+
+        #Set Background color
+        self.root.configure(background = '#3498db')
+
+        #Create Task List Frame
+        self.task_list_frame = tk.Frame(self.root, bg='#3498bd')
+        self.task_list_frame.pack(fill="both", expand = True)
+
+        #Create task list box
+        self.task_list_box = tk.Listbox(self.task_list_frame, width = 40, bg='#f7f7f7', fg='#333333', font=('Arial',12), highlightthickness=3)
+        self.task_list_box.pack(side="left",fill="both", expand=True)
+
+        #Create Scrollbar
+        self.scrollbar = tk.Scrollbar(self.task_list_frame, bg='#3498db')
+        self.scrollbar.pack(side="right", fill="y")
+        self.task_list_box.config(yscrollcommand=self.scrollbar.set)
+        self.scrollbar.config(command=self.task_list_box.yview)
+
+        #Create entry frame
+        self.entry_frame = tk.Frame(self.root, bg='#3498db')
+        self.entry_frame.pack(fill="x")
+
+        #Create task entry
+        self.task_entry = tk.Entry(self.entry_frame, width=40, bg='#f7f7f7', fg='#333333', font=('Arial', 12))
+        self.task_entry.pack(side="left")
+
+        #Create add task button
+        self.add_task_button = tk.Button(self.entry_frame, text="Add Task", command=self.add_task, bg='#2ecc71',fg='#ffffff', font=('Arial', 12))
+        self.add_task_button.pack(side="left")
+
+        #Create delete task button
+        self.delete_task_button = tk.Button(self.entry_frame, text="Delete Task", command = self.delete_task, bg='#e74c3c' , fg='#ffffff', font=('Arial', 12))
+        self.delete_task_button.pack(side="left")
+
+        #Create update task button
+        self.update_task_button = tk.Button(self.entry_frame, text="Update Task", command=self.update_task, bg='#9b59b6',fg= '#ffffff', font=('Arial',12))
+        self.update_task_button.pack(side="left")
+
+    def add_task(self):
+        task = self.task_entry.get()
+        if task:
+            self.task.append(task)
+            self.task_list_box.insert("end",task)
+            self.task_entry.delete(0,"end")
+        else:
+            messagebox.showerror("Error", "Please enter a task")
+
+    def delete_task(self):
+        try:
+            task_index = self.task_list_box.curselection()[0]
+            self.task_list_box.delete(task_index)
+            self.tasks.pop(task_index)
+        except:
+            messagebox.showerror("Error","Please enter a task")
+
+    def update_task(self):
+        try:
+            task_index = self.task_list_box.curselection()[0]
+            task = self.task_entry.get()
+            if task:
+                self.tasks[task_index] = task
+                self.task_list_box.delete(task_index)
+                self.task_list_box.insert(task_index, task)
+                self.task_entry.delete(0,"end")
+            else:
+                messagebox.showerror("Error", "Please enter a task to update")
+        except:
+            messagebox.showerror("Error", "Please select a task to update")
+
+if __name__ == "__main__":
+    root = tk.Tk()
+    todo_list = ToDoList(root)
+    root.mainloop()
