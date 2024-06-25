@@ -52,9 +52,25 @@ class ToDoList:
         self.priority_button = tk.Button( self.entry_frame, text="Set Priority", command=self.add_priority, bg='#98fb98', fg='#000000', font=('Arial', 12))
         self.priority_button.pack(side="left")
 
-        #Create set priority button
+        #Create set deadline button
         self.deadline_button = tk.Button( self.entry_frame, text="Set Deadline", command=self.add_deadline, bg='#ffd700', fg='#000000', font=('Arial', 12))
         self.deadline_button.pack(side="left")
 
+def add_task(self):
+    task = self.task_entry.get()
+    if task:
+        self.task.append({'task':task, 'priority':'None', 'deadline': 'None'})
+        self.task_list_box.insert("end",task)
+        self.task_entry.delete(0, "end")
+    else:
+        messagebox.showerror("Error", "Please enter a task")
+
+def delete_task(self):
+    try:
+        task_index = self.task_list_box.curselection()[0]
+        self.task_list_box.delete(task_index)
+        self.tasks.pop(task_index)
+    except IndexError:
+        messagebox.showerror("Error", "")
+
     
-    root.mainloop()
