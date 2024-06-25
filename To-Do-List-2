@@ -1,0 +1,60 @@
+import tkinter as tk
+from tkinter import messagebox
+from tkinter import simpledialog
+from datetime import datetime
+import threading
+
+class ToDoList:
+    def __init__(self,root):
+        self.root = root
+        self.root.title("To-Do List")
+        self.tasks = []
+
+        # Set Background color
+        self.root.configure(background = '#f0f0f0')
+
+        #Create Task List Frame 
+        self.task_list_frame = tk.Frame(self.root, bg='#f0f0f0')
+        self.task_list_frame.pack(fill = "both", expand = True)
+
+        #Create task List box
+        self.task_list_box = tk.Listbox(self.task_list_frame, width = 50, bg ='#ffffff', fg = '#000000', font = ('Arial', 12),highlightthickness=3)
+        self.task_list_box.pack(fill="both" , expand = True)
+
+        #Create Scrollbar
+        self.scrollbar = tk.Scrollbar(self.task_list_frame)
+        self.scrollbar.config(command=self.task_list_frame)
+        self.scrollbar.pack(side ="right", fill="y")
+        self.task_list_box.config(yscrollcommand=self.scrollbar.set)
+        self.scrollbar.config(command=self.task_list_box.yview)
+
+        #Create Entry Frame
+        self.entry_frame = tk.Frame(self.root, bg='#f0f0f0')
+        self.entry_frame.pack(fill="x")
+
+        #Create task entry
+        self.task_entry = tk.Entry(self.entry_frame, width=40, bg = '#ffffff', fg = '#000000', font=('Arial', 12))
+        self.task_entry.pack(Side="left")
+
+        #Create add task button
+        self.add_task_button = tk.Button( self.entry_frame, text="Add Task", command=self.add_task, bg='#add8e6', fg='#000000', font=('Arial', 12))
+        self.add_task_button.pack(side="left")
+
+        #Create Delete task button
+        self.delete_task_button = tk.Button( self.entry_frame, text="Delete Task", command=self.delete_task, bg='#ffcccb', fg='#000000', font=('Arial', 12))
+        self.delete_task_button.pack(side="left")
+
+        #Create Update task button
+        self.update_task_button = tk.Button( self.entry_frame, text="Update Task", command=self.update_task, bg='#d3d3d3', fg='#000000', font=('Arial', 12))
+        self.update_task_button.pack(side="left")
+
+        #Create set priority button
+        self.priority_button = tk.Button( self.entry_frame, text="Set Priority", command=self.add_priority, bg='#98fb98', fg='#000000', font=('Arial', 12))
+        self.priority_button.pack(side="left")
+
+        #Create set priority button
+        self.deadline_button = tk.Button( self.entry_frame, text="Set Deadline", command=self.add_deadline, bg='#ffd700', fg='#000000', font=('Arial', 12))
+        self.deadline_button.pack(side="left")
+
+    
+    root.mainloop()
