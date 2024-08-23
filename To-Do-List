@@ -58,7 +58,7 @@ class ToDoList:
         try:
             task_index = self.task_list_box.curselection()[0]
             self.task_list_box.delete(task_index)
-            self.tasks.pop(task_index)
+            self.task.pop(task_index)
         except:
             messagebox.showerror("Error","Please enter a task")
 
@@ -67,7 +67,7 @@ class ToDoList:
             task_index = self.task_list_box.curselection()[0]
             task = self.task_entry.get()
             if task:
-                self.tasks[task_index] = task
+                self.task[task_index] = task
                 self.task_list_box.delete(task_index)
                 self.task_list_box.insert(task_index, task)
                 self.task_entry.delete(0,"end")
