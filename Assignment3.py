@@ -25,7 +25,7 @@ print (result)
 #o   Sine of the number (in radians)
 #3.   Displays the calculated results.
 
-import math
+'''import math
 
 num = int(input("Enter a number : "))
 #adding squareroot
@@ -43,3 +43,4 @@ Sine_value = math.sin(num)
 print(f"\nSquare root of {num} = {square_root: }")
 print(f"Natural log {num} = {natural_log}")
 print(f"Sine of {num} = {Sine_value: }")
+'''
